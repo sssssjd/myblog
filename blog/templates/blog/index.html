@@ -6,78 +6,13 @@
     <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
 </head>
 <body>
-<form id="test-form" action="test">
-    <h1>{{article.title}}</h1>
-    <h3>{{article.content}}</h3>
-    <legend>请选择想要学习的编程语言：</legend>
-    <fieldset>
-        <p><label class="selectAll"><input type="checkbox"> <span class="selectAll">全选</span></label> <a href="#0" class="invertSelect">反选</a></p>
-        <p><label><input type="checkbox" name="lang" value="javascript"> JavaScript</label></p>
-        <p><label><input type="checkbox" name="lang" value="python"> Python</label></p>
-        <p><label><input type="checkbox" name="lang" value="ruby"> Ruby</label></p>
-        <p><label><input type="checkbox" name="lang" value="haskell"> Haskell</label></p>
-        <p><label><input type="checkbox" name="lang" value="scheme"> Scheme</label></p>
-        <p><button type="submit">Submit</button></p>
-    </fieldset>
-</form>
-
-<script type="text/javascript">
-    'use strict';
-    var
-        form = $('#test-form'),
-        langs = form.find('[name=lang]'),
-        selectAll = form.find('label.selectAll :checkbox'),
-        selectAllLabel = form.find('label.selectAll span.selectAll'),
-        deselectAllLabel = form.find('label.selectAll span.deselectAll'),
-        invertSelect = form.find('a.invertSelect');
-
-
-    form.find('*').show().off();
-    deselectAllLabel.hide();
-    form.find(':checkbox').prop('checked', false).off();
-
-    selectAll.change(function () {
-        if (selectAll.prop('checked')){
-            langs.prop('checked',true);
-            selectAllLabel.html('全不选');
-        }else {
-            langs.prop('checked',false);
-            selectAllLabel.html('全选');
-        }
-    });
-    function selectall(){
-        var j=0;
-        for(let i=0;i<langs.length;i++){
-            if(!langs.get(i).checked){
-                j++;
-                selectAll.prop('checked',false);
-                selectAllLabel.html('全选');
-            }
-        }
-        if(j===0){
-            selectAll.prop('checked',true);
-            selectAllLabel.html('全不选');
-        }
-    }
-    langs.each(function () {
-        let aa=$(this);
-        aa.change(function () {
-            selectall();
-        });
-    })
-    invertSelect.click(function () {
-        for(let i=0;i<langs.length;i++){
-            if(langs.get(i).checked){
-                langs.get(i).checked=false;
-                selectall()
-            }else{
-                langs.get(i).checked=true;
-                selectall()
-            }
-        }
-    })
-
-
-</script>
+<h1>
+<a href="">新文章</a>
+<br/>
+</h1>
+{% for article in articles %}
+<a href="">{{article.title}}</a>
+<br/>
+{% endfor %}
 </body>
 </html>
